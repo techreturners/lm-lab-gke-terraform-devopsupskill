@@ -145,7 +145,7 @@ terraform plan
 
 ### Step 8 - Create your cluster with apply
 
-We can then create your cluster by apply the configuration.
+We can then create your cluster by applying the configuration.
 
 **NOTE** If you find it complain that an API isn't enabled. [Compute Engine API](https://console.developers.google.com/apis/api/compute.googleapis.com/overview) and [Kubernetes Engine API](https://console.cloud.google.com/apis/api/container.googleapis.com/overview) are required for terraform apply to work on this configuration. Enable both APIs for your Google Cloud and then continue.
 
