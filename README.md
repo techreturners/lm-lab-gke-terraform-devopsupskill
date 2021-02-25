@@ -6,9 +6,35 @@ This repository shows examples and guides for using [Terraform](https://terrafor
 
 ### Pre-requisites
 
-You will need to ensure that you have installed terraform and the Google Cloud SDK (Command Line Interface) - as mentioned in the pre-session assignments  for DevOps up-skill session three.
+You will need to ensure that you have installed terraform and the Google Cloud SDK (Command Line Interface) - as mentioned in the pre-session assignments for DevOps up-skill session three.
 
-### Step 1 - Install kubectl tool
+### Step 1 - Install and configure the GCloud SDK
+
+We'll use the Google Command Line tool to get information from the cluster.
+
+To install this you can install manually by following [these instructions](https://cloud.google.com/sdk/docs/quickstarts) or if you have a package manager you can use the instructions below:
+
+**Homebrew**
+
+```
+brew install --cask google-cloud-sdk
+```
+
+**Chocolatey**
+
+```
+choco install gcloudsdk
+```
+
+Once it is installed we need to configure it to point at your Google Cloud Project - to do this run:
+
+```
+gcloud init
+```
+
+When prompted ensure you pick the correct Google Cloud Project.
+
+### Step 2 - Install kubectl tool
 
 The `kubectl` tool will be utilised to interact with your Kubernetes (K8S) cluster.
 
@@ -44,9 +70,11 @@ Client Version: version.Info{Major:"1", Minor:"20", GitVersion:"v1.20.4", GitCom
 
 Dont worry if it says "Unable to connect to server" at this stage. We'll be sorting that later.
 
-### Step 2 - Explore the files
+### Step 3 - Explore the files
 
 Before we go ahead and create your cluster its worth exploring the files.
+
+Oh and before we do explore, the files in this directory could have been named whatever we like. For example the **outputs.tf** file can have been called **foo.tf** - we just chose to call it that because it contained outputs. So the naming was more of a standard than a requirement.
 
 **terraform.tfvars**
 
@@ -61,6 +89,10 @@ This file contains the setup for the Virtual Private Cloud (VPC - remember those
 Does the actual job of provisioning a GKE cluster and a separately managed node pool (recommended).
 
 You'll also see that this file contains a variable called `gke_num_nodes` that is defaulted to 1. This means that one node will be created in each subnet. Totaling 3 nodes for your cluster.
+
+**outputs.tf**
+
+This file defines the outputs that will be produced by terraform when things have been provisioned.
 
 **versions.tf** 
 
@@ -82,7 +114,7 @@ Then rename that service account file to be called **service-account.json**
 
 The reason for the rename is because you'll see it [mentioned in the **versions.tf**](./versions.tf) file and also in the **.gitignore** file. Choosing the name **service-account.json** will ensure you don't accidentally commit it due to us adding it to the gitignore file.
 
-### Step 5 - Initialise terraform
+### Step 4 - Initialise terraform
 
 We need to get terraform to pull down the google provider.
 
@@ -103,7 +135,7 @@ Initializing provider plugins...
 - Installed hashicorp/google v3.58.0 (signed by HashiCorp)
 ```
 
-### Step 6 - Review changes with a plan
+### Step 5 - Review changes with a plan
 
 Firstly run a **plan** to see if what Terraform decides will happen.
 
@@ -111,7 +143,7 @@ Firstly run a **plan** to see if what Terraform decides will happen.
 terraform plan
 ```
 
-### Step 7 - Create your cluster with apply
+### Step 6 - Create your cluster with apply
 
 We can then create your cluster by apply the configuration.
 
@@ -123,6 +155,17 @@ terraform apply
 
 Sit back and relax - it might take 10 mins or so to create your cluster.
 
+Once its finished it'll output something like the info below. Those **outputs** are defined in the **outputs.tf** file.
+
+```
+Outputs:
+
+kubernetes_cluster_host = "35.246.22.132"
+kubernetes_cluster_name = "devops-upskill-305410-gke"
+project_id = "devops-upskill-305410"
+region = "europe-west2"
+```
+
 Once its done you'll have a your Kubernetes cluster all ready to go!!!
 
 ### Step 8 - Configure your **kube control** 
@@ -131,5 +174,155 @@ Once its done you'll have a your Kubernetes cluster all ready to go!!!
 
 We need to configure **kubectl** to be able to authenticate with your cluster.
 
+To do this we use the Google Cloud Command Line to get the credentials. Notice how we reference the outputs in the command below:
 
 
+```
+gcloud container clusters get-credentials $(terraform output -raw kubernetes_cluster_name) --region $(terraform output -raw region)
+```
+
+It should say something like:
+
+```
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for devops-upskill-305410-gke.
+```
+
+### Step 9 - Check if kubectl can access cluster
+
+You can now verify if `kubectl` can access your cluster.
+
+Go ahead and see how many nodes are running:
+
+```
+kubectl get nodes
+```
+
+It should show something like:
+
+```
+NAME                                                  STATUS   ROLES    AGE   VERSION
+gke-devops-upskill-3-devops-upskill-3-6ab12de4-6p9p   Ready    <none>   18m   v1.18.12-gke.1210
+gke-devops-upskill-3-devops-upskill-3-eada08f1-793v   Ready    <none>   18m   v1.18.12-gke.1210
+gke-devops-upskill-3-devops-upskill-3-fa0c8ee0-j7qt   Ready    <none>   18m   v1.18.12-gke.1210
+```
+
+Exciting eh!!!
+
+### Step 10 - Deploying your first app in a pod!!
+
+Finally lets get a container running on your cluster.
+
+Firstly check if there are any running pods
+
+```
+kubectl get pods
+```
+
+It should probably say something like this:
+
+```
+No resources found in default namespace.
+```
+
+Lets deploy the nginx deployment.
+
+```
+kubectl apply -f kubernetes/nginx-deployment.yaml
+```
+
+Now lets see the pods
+
+```
+kubectl get pods
+```
+
+And it will show something like this:
+
+```
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-5cd5cdbcc4-b46m7   1/1     Running   0          14s
+nginx-deployment-5cd5cdbcc4-knxss   1/1     Running   0          14s
+nginx-deployment-5cd5cdbcc4-sqm2p   1/1     Running   0          14s
+```
+
+Actually you know what, I think 3 replicas is a bit overkill. Lets bring it down to 2 replicas.
+
+Update the nginx-deployment.yaml file and change it down to 2 and save the file.
+
+Then re-run your deployment.
+
+```
+kubectl apply -f kubernetes/nginx-deployment.yaml
+```
+
+Now lets see the pods
+
+```
+kubectl get pods
+```
+
+And you should see something like this:
+
+```
+NAME                                READY   STATUS        RESTARTS   AGE
+nginx-deployment-5cd5cdbcc4-b46m7   1/1     Running       0          3m47s
+nginx-deployment-5cd5cdbcc4-knxss   1/1     Running       0          3m47s
+nginx-deployment-5cd5cdbcc4-sqm2p   0/1     Terminating   0          3m47s
+```
+
+### Step 11 - Exposing your webserver
+
+Finally lets get that web server exposed to the internet with a **service**
+
+We can do this by creating the service (which will sit in front of our pods) and the ingress point
+
+Firstly create the service
+
+```
+kubectl apply -f kubernetes/nginx-service.yaml
+```
+
+And then create the ingress
+
+```
+kubectl apply -f kubernetes/nginx-ingress.yaml
+```
+
+Kubernetes will now create the required load balancer and create an external IP address for your ingress point.
+
+Keep running the command below until you see an external IP address
+
+```
+ kubectl get ing
+```
+
+It should output something like this:
+
+```
+NAME                      CLASS    HOSTS   ADDRESS         PORTS   AGE
+nginx-webserver-ingress   <none>   *       34.117.49.187   80      95s
+```
+
+### Step 12 - Marvel at your creation
+
+After around 5 to 10 mins you should be able to hit the endpoint with your browser. Using the example above I would go to: http://34.117.49.187
+
+**NOTE** It does take around 5 to 10 mins, for some time you might see a Google 404 page.
+
+### Step 13 - Tearing down your cluster
+
+Finally we want to destroy our cluster.
+
+Firstly lets remove the service and ingress
+
+```
+kubectl delete -f kubernetes/nginx-ingress.yaml
+kubectl delete -f kubernetes/nginx-service.yaml
+```
+
+Then we can destroy the cluster in full.
+
+```
+terraform destroy
+```
