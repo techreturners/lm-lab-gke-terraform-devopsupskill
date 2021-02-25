@@ -166,7 +166,7 @@ project_id = "devops-upskill-305410"
 region = "europe-west2"
 ```
 
-Once its done you'll have a your Kubernetes cluster all ready to go!!!
+Once its done you'll have your Kubernetes cluster all ready to go!!!
 
 ### Step 9 - Configure your **kube control** 
 
