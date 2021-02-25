@@ -4,13 +4,11 @@ This repository shows examples and guides for using [Terraform](https://terrafor
 
 ## Instructions
 
-### Pre-requisites
-
-You will need to ensure that you have installed terraform and the Google Cloud SDK (Command Line Interface) - as mentioned in the pre-session assignments for DevOps up-skill session three.
-
 ### Step 1 - Install and configure the GCloud SDK
 
 We'll use the Google Command Line tool to get information from the cluster.
+
+If you haven't already installed it then you can follow below to install.
 
 To install this you can install manually by following [these instructions](https://cloud.google.com/sdk/docs/quickstarts) or if you have a package manager you can use the instructions below:
 
