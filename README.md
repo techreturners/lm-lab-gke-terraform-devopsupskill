@@ -10,7 +10,7 @@ Leading on from session 3 this repository provides instruction for both provisio
 
 You have probably destroyed your Kubernetes cluster following the previous session. 
 
-Following through the [Provisioning](./docs/PROVISIONING.md) guide to re-provision your Kubernetes cluster.
+Follow through the [Provisioning](./docs/PROVISIONING.md) guide to re-provision your Kubernetes cluster.
 
 The Terraform files have also been updated to include the creation of a container registry.
 

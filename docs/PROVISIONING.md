@@ -4,6 +4,8 @@ The steps here cover how to provision your GKE cluster and container registry.
 
 ## Instructions
 
+**NOTE:** You might have already performed some of the steps (such as installing tools) mentioned below. If so you can ignore those steps and move directory to **Step 4**
+
 ### Step 1 - Install and configure the GCloud SDK
 
 We'll use the Google Command Line tool to get information from the cluster.
