@@ -17,3 +17,8 @@ output "kubernetes_cluster_host" {
   value       = google_container_cluster.primary.endpoint
   description = "GKE Cluster Host"
 }
+
+output "container_registry_address" {
+  value       = "eu.gcr.io/${var.project_id}/devops-bookstore-api:1.0"
+  description = "Container registry example tag"
+}

@@ -18,10 +18,11 @@ For those interested in the terraform changes, you can see a diff of what has ch
 
 [https://github.com/techreturners/devops-upskill-gke-terraform/compare/session-004-gitops](https://github.com/techreturners/devops-upskill-gke-terraform/compare/session-004-gitops)
 
-
 ### Step 2 - Build and push your docker image
 
-TBC
+The next step is to build the docker image locally and push it up to your newly created container registry.
+
+Follow through the [Pushing Image Guide](./docs/PUSHINGIMAGE.md) for instructions on how to do this.
 
 ### Step 3 - Deploy and navigate ArgoCD
 
