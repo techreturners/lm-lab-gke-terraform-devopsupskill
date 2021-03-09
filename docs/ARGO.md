@@ -64,7 +64,7 @@ kubectl port-forward svc/argocd-server -n argocd 9000:443
 
 Then you should be able to visit [http://localhost:9000](http://localhost:9000). It will likely tell you that the certificate cannot be verified. This is because you haven't provisioned a full SSL certificate. You can ignore this warning and follow the instructions to "Visit the site anyway"
 
-Enter the **username** of **admin** and the password displayed from the previous step to log in to the ArgoCD dashboard. It should 
+Enter the **username** of **admin** and the password displayed from the previous step to log in to the ArgoCD dashboard.
 
 Once you have confirmed that you can see the Argo dashboard you can head back to the [README](../README.md) and move on to step 4.
 
