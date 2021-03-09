@@ -24,13 +24,17 @@ The next step is to build the docker image locally and push it up to your newly 
 
 Follow through the [Pushing Image Guide](./docs/PUSHINGIMAGE.md) for instructions on how to do this.
 
-### Step 3 - Deploy and navigate ArgoCD
+### Step 3 - Deploy and navigate to ArgoCD
 
-TBC
+Now you can move on to getting the backend API Python app deployed via Argo.
+
+Follow through the [Argo setup and configuration steps](./docs/ARGO.md)
 
 ### Step 4 - Update your application and push new image
 
-TBC
+Using what we've covered so far, try and update the backend Python App to include some new books.
+
+Build the docker image and push a new version (remember that tagging) to your container registry.
 
 ### Step 5 - Deploy the new version using a GitOps workflow
 
