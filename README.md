@@ -30,12 +30,10 @@ Now you can move on to getting the backend API Python app deployed via Argo.
 
 Follow through the [Argo setup and configuration steps](./docs/ARGO.md)
 
-### Step 4 - Update your application and push new image
+### Step 4 - Setting up your DevOps workflow in Argo
 
-Using what we've covered so far, try and update the backend Python App to include some new books.
+Great work! If you've got to here you should now be able to see the Argo Dashboard.
 
-Build the docker image and push a new version (remember that tagging) to your container registry.
+All your infrastructure is setup ready to go! Now you can head over to the GitOps repository to setup your workflow.
 
-### Step 5 - Deploy the new version using a GitOps workflow
-
-TBC
+[https://github.com/techreturners/devops-upskill-gitops](https://github.com/techreturners/devops-upskill-gitops)

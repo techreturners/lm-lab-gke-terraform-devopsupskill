@@ -38,7 +38,7 @@ You can check its progress by running
 kubectl get pods -n argocd
 ```
 
-You'll see some pods listed as running when ready to go.
+Once all the pods have a **STATUS** of **Running** you can move to the next step.
 
 ### Step 3 - Grab the ArgoCD password
 
@@ -64,6 +64,10 @@ kubectl port-forward svc/argocd-server -n argocd 9000:443
 
 Then you should be able to visit [http://localhost:9000](http://localhost:9000). It will likely tell you that the certificate cannot be verified. This is because you haven't provisioned a full SSL certificate. You can ignore this warning and follow the instructions to "Visit the site anyway"
 
-### Step 5 - Creating an application via UI
+Enter the **username** of **admin** and the password displayed from the previous step to log in to the ArgoCD dashboard. It should 
 
-Now the exciting part - lets get that container image deployed.
+Once you have confirmed that you can see the Argo dashboard you can head back to the [README](../README.md) and move on to step 4.
+
+It should look something similar to this:
+
+![Argo Dashboard](./images/argo_dashboard.png)
