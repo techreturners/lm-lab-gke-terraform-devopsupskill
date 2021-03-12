@@ -30,7 +30,17 @@ That will produce a local docker image. One that we can PUSH up to your containe
 
 Next we need to make sure your local docker instance has the right credentials to push up to your container registry. 
 
-Follow through the two steps on the GCP documentation using the [gcloud credential helper instructions](https://cloud.google.com/container-registry/docs/advanced-authentication#gcloud-helper) 
+Firstly run the log in command to authentication with Google cloud:
+
+```
+gcloud auth login
+```
+
+Then you can configure Docker to be aware of the credentials ready for pushing by running:
+
+```
+gcloud auth configure-docker
+```
 
 ### Step 4 - Tag your docker image with the location of your registry
 
