@@ -56,6 +56,8 @@ If that password doesn't work try running this command to obtain the password (t
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
+(If you see a % sign as the last character that is just signalling the end of line and is NOT part of the password)
+
 ### Step 4 - Port forwarding into the ArgoCD dashboard
 
 We can use `kubectl` to port forward requests from our machine into the cluster. 
