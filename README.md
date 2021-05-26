@@ -4,7 +4,11 @@ This repository shows examples and guides for using [Terraform](https://terrafor
 
 ## Instructions
 
-### Step 1 - Install and configure the GCloud SDK
+### Step 1 - Fork and clone
+
+Fork this repository into your own GitHub account and then clone (your forked version) down to your local machine.
+
+### Step 2 - Install and configure the GCloud SDK
 
 We'll use the Google Command Line tool to get information from the cluster.
 
@@ -32,7 +36,7 @@ gcloud init
 
 When prompted ensure you pick the correct Google Cloud Project.
 
-### Step 2 - Install kubectl tool
+### Step 3 - Install kubectl tool
 
 The `kubectl` tool will be utilised to interact with your Kubernetes (K8S) cluster.
 
@@ -68,7 +72,7 @@ Client Version: version.Info{Major:"1", Minor:"20", GitVersion:"v1.20.4", GitCom
 
 Dont worry if it says "Unable to connect to server" at this stage. We'll be sorting that later.
 
-### Step 3 - Explore the files
+### Step 4 - Explore the files
 
 Before we go ahead and create your cluster its worth exploring the files.
 
@@ -96,13 +100,13 @@ This file defines the outputs that will be produced by terraform when things hav
 
 Configures the terraform providers (in our case the GCP provider) and sets the Terraform version to at least 0.14.
 
-### Step 4 - Update the tfvars file
+### Step 5 - Update the tfvars file
 
 Now you know the files the next step is to update the tfvars file according to your project.
 
 Update the project ID to be that of your Google Project ID and change the region if you would like it to be anything other than the UK.
 
-### Step 5 - Update service account
+### Step 6 - Update service account
 
 In the terraform installation video you setup a service account. You'll need to re-use that service account again in order for Terraform to authenticate with your Google cloud account.
 
@@ -112,7 +116,7 @@ Then rename that service account file to be called **service-account.json**
 
 The reason for the rename is because you'll see it [mentioned in the **versions.tf**](./versions.tf) file and also in the **.gitignore** file. Choosing the name **service-account.json** will ensure you don't accidentally commit it due to us adding it to the gitignore file.
 
-### Step 6 - Initialise terraform
+### Step 7 - Initialise terraform
 
 We need to get terraform to pull down the google provider.
 
@@ -133,7 +137,7 @@ Initializing provider plugins...
 - Installed hashicorp/google v3.58.0 (signed by HashiCorp)
 ```
 
-### Step 7 - Review changes with a plan
+### Step 8 - Review changes with a plan
 
 Firstly run a **plan** to see if what Terraform decides will happen.
 
@@ -141,7 +145,7 @@ Firstly run a **plan** to see if what Terraform decides will happen.
 terraform plan
 ```
 
-### Step 8 - Create your cluster with apply
+### Step 9 - Create your cluster with apply
 
 We can then create your cluster by applying the configuration.
 
@@ -166,7 +170,7 @@ region = "europe-west2"
 
 Once its done you'll have your Kubernetes cluster all ready to go!!!
 
-### Step 9 - Configure your **kube control** 
+### Step 10 - Configure your **kube control** 
 
 **kubectl** is used to issue actions on our cluster.
 
@@ -186,7 +190,7 @@ Fetching cluster endpoint and auth data.
 kubeconfig entry generated for devops-upskill-305410-gke.
 ```
 
-### Step 10 - Check if kubectl can access cluster
+### Step 11 - Check if kubectl can access cluster
 
 You can now verify if `kubectl` can access your cluster.
 
@@ -207,7 +211,7 @@ gke-devops-upskill-3-devops-upskill-3-fa0c8ee0-j7qt   Ready    <none>   18m   v1
 
 Exciting eh!!!
 
-### Step 11 - Deploying your first app in a pod!!
+### Step 12 - Deploying your first app in a pod!!
 
 Finally lets get a container running on your cluster.
 
@@ -269,7 +273,7 @@ nginx-deployment-5cd5cdbcc4-knxss   1/1     Running       0          3m47s
 nginx-deployment-5cd5cdbcc4-sqm2p   0/1     Terminating   0          3m47s
 ```
 
-### Step 12 - Exposing your webserver
+### Step 13 - Exposing your webserver
 
 Finally lets get that web server exposed to the internet with a **service**
 
@@ -302,13 +306,13 @@ NAME                      CLASS    HOSTS   ADDRESS         PORTS   AGE
 nginx-webserver-ingress   <none>   *       34.117.49.187   80      95s
 ```
 
-### Step 13 - Marvel at your creation
+### Step 14 - Marvel at your creation
 
 After around 5 to 10 mins you should be able to hit the endpoint with your browser. Using the example above I would go to: http://34.117.49.187
 
 **NOTE** It does take around 5 to 10 mins, for some time you might see a Google 404 page.
 
-### Step 14 - Tearing down your cluster
+### Step 15 - Tearing down your cluster
 
 Finally we want to destroy our cluster.
 
