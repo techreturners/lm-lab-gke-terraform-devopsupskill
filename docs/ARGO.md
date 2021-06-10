@@ -74,7 +74,7 @@ Then you should be able to visit [http://localhost:9000](http://localhost:9000).
 
 Enter the **username** of **admin** and the password displayed from the previous step to log in to the ArgoCD dashboard.
 
-Once you have confirmed that you can see the Argo dashboard you can head back to the [README](../README.md) and move on to step 4.
+Once you have confirmed that you can see the Argo dashboard you can head back to the [README](../README.md) and move on to step 5.
 
 It should look something similar to this:
 
