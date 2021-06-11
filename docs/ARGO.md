@@ -50,7 +50,7 @@ By default, ArgoCD generates a password for you. To extract this run the followi
 kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
 ```
 
-If that password doesn't work try running this command to obtain the password (they changes it between version 1.8 and 1.9):
+If that password doesn't work try running this command to obtain the password (they changed it between version 1.8 and 1.9):
 
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
