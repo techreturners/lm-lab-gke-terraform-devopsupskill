@@ -157,6 +157,8 @@ terraform apply
 
 Sit back and relax - it might take 10 mins or so to create your cluster.
 
+NEED TO ACTIVATE K8S ENGINE API BY HAND
+
 Once its finished it'll output something like the info below. Those **outputs** are defined in the **outputs.tf** file.
 
 ```
