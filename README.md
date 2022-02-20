@@ -153,15 +153,17 @@ terraform plan
 
 We can then create your cluster by applying the configuration.
 
-**NOTE** If you find it complain that an API isn't enabled. [Compute Engine API](https://console.developers.google.com/apis/api/compute.googleapis.com/overview) and [Kubernetes Engine API](https://console.cloud.google.com/apis/api/container.googleapis.com/overview) are required for terraform apply to work on this configuration. Enable both APIs for your Google Cloud and then continue.
+**NOTE** If you find that it errors stating that an API isn't enabled. [Compute Engine API](https://console.developers.google.com/apis/api/compute.googleapis.com/overview) and [Kubernetes Engine API](https://console.cloud.google.com/apis/api/container.googleapis.com/overview) are required for `terraform apply` to work on this configuration. Enable both APIs for your Google Cloud project and then continue.
 
 ```
 terraform apply
 ```
 
-Sit back and relax - it might take 10 mins or so to create your cluster.
+Sit back and relax ☕️ - it might take 10 mins or so to create your cluster.
 
-Once its finished it'll output something like the info below. Those **outputs** are defined in the **outputs.tf** file.
+Once its finished it'll output something like the info below. 
+
+Those **outputs** are defined in the **outputs.tf** file.
 
 ```
 Outputs:
@@ -176,7 +178,7 @@ Once its done you'll have your Kubernetes cluster all ready to go!!!
 
 ### Step 10 - Configure your **kube control** 
 
-**kubectl** is used to issue actions on our cluster.
+[kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) is used to issue actions on our cluster.
 
 We need to configure **kubectl** to be able to authenticate with your cluster.
 
@@ -213,7 +215,7 @@ gke-devops-upskill-3-devops-upskill-3-eada08f1-793v   Ready    <none>   18m   v1
 gke-devops-upskill-3-devops-upskill-3-fa0c8ee0-j7qt   Ready    <none>   18m   v1.18.12-gke.1210
 ```
 
-Exciting eh!!!
+Exciting eh!!! 🚀
 
 ### Step 12 - Deploying your first app in a pod!!
 
