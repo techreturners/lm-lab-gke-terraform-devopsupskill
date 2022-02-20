@@ -78,6 +78,10 @@ Before we go ahead and create your cluster its worth exploring the files.
 
 Oh and before we do explore, the files in this directory could have been named whatever we like. For example the **outputs.tf** file can have been called **foo.tf** - we just chose to call it that because it contained outputs. So the naming was more of a standard than a requirement.
 
+**variables.tf**
+
+This file contains the definitions of all the terraform [input variables](https://www.terraform.io/language/values/variables) we can set to drive your terraform execution.
+
 **terraform.tfvars**
 
 Think of this as the place where you define the actual values of variables to be used by your terraform configuration.
