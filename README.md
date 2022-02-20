@@ -316,7 +316,7 @@ nginx-webserver-ingress   <none>   *       34.117.49.187   80      95s
 
 After around 5 to 10 mins you should be able to hit the endpoint with your browser. Using the example above I would go to: http://34.117.49.187
 
-**NOTE** It does take around 5 to 10 mins, for some time you might see a Google 404 page.
+**NOTE** It does take around 5 to 10 mins and for some time you might see a Google 404 page.
 
 **NOTE** Remember to check Google classroom before tearing things down. There are a couple of screenshots you should submit as evidence of your success 🙌
 
