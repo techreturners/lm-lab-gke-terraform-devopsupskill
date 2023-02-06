@@ -2,7 +2,7 @@
 
 At this point you'll have heard material around a few key cloud topics such as regions, availability zones, cloud networking and VPC's. You'll have also heard information around Kubernetes. 
 
-Building on this theoretical knowledge, this guided lab will show how to create the various cloud services required to provision a Kubernetes cluster on AWS. For that provisioning you'll be taking the **Infrastructure as Code** approach and using [Terraform](https://terraform.io) to create our cloud infrastructure.
+Building on this theoretical knowledge, this guided lab will show how to create the various cloud services required to provision a Kubernetes cluster on Google Cloud Platform (GCP). For that provisioning, you'll be taking the **Infrastructure as Code** approach and using [Terraform](https://terraform.io) to create our cloud infrastructure.
 
 For GCP, the end result is that you'll have a [GKE (Google Kubernetes Engine) Cluster](https://cloud.google.com/kubernetes-engine)
 
@@ -322,9 +322,11 @@ nginx-webserver-ingress   <none>   *       34.117.49.187   80      95s
 
 After around 5 to 10 mins you should be able to hit the endpoint with your browser. Using the example above I would go to: http://34.117.49.187
 
-**NOTE** It does take around 5 to 10 mins and for some time you might see a Google 404 page.
+> **⚠️ Note**
+> It does take around 5 to 10 mins and for some time you might see a Google 404 page.
 
-**NOTE** Remember to check Google classroom before tearing things down. There are a couple of screenshots you should submit as evidence of your success 🙌
+> **⚠️ Note**
+> Remember to check Google classroom before tearing things down. There are a couple of screenshots you should submit as evidence of your success 🙌
 
 ### Step 15 - Tearing down your cluster
 
@@ -332,12 +334,15 @@ Finally we want to destroy our cluster.
 
 Firstly lets remove the service and ingress
 
+> **⚠️ Note**
+> You remove the service first because this will have provisioned a Load Balancer. We need to remove that load balancer before we perform any destroying of infrastrucure otherwise the terraform destory will fail due to their being dependencies between the load balancer and your VPC.
+
 ```
 kubectl delete -f kubernetes/nginx-ingress.yaml
 kubectl delete -f kubernetes/nginx-service.yaml
 ```
 
-Then we can destroy the cluster in full.
+Then you can destroy the cluster in full.
 
 ```
 terraform destroy
