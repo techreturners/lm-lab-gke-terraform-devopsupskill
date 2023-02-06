@@ -30,12 +30,14 @@ resource "google_container_node_pool" "primary_nodes" {
       "https://www.googleapis.com/auth/monitoring",
     ]
 
+    disk_size_gb = 20
+
     labels = {
       env = var.project_id
     }
 
     # preemptible  = true
-    machine_type = "n1-standard-1"
+    machine_type = "e2-small"
     tags         = ["gke-node", "${var.project_id}-gke"]
     metadata = {
       disable-legacy-endpoints = "true"
