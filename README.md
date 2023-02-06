@@ -260,7 +260,7 @@ nginx-deployment-5cd5cdbcc4-knxss   1/1     Running   0          14s
 nginx-deployment-5cd5cdbcc4-sqm2p   1/1     Running   0          14s
 ```
 
-Actually you know what, I think 3 replicas is a bit overkill. Lets bring it down to 2 replicas.
+Actually you know what, I think 3 replicas is a bit too many. Let's bring it down to 2 replicas.
 
 Update the nginx-deployment.yaml file and change it down to 2 and save the file.
 
