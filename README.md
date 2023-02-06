@@ -1,6 +1,10 @@
 # GKE and Terraform
 
-This repository shows examples and guides for using [Terraform](https://terraform.io) to provision a [GKE (Google Kubernetes Engine) Cluster](https://cloud.google.com/kubernetes-engine) on Google Cloud Platform
+At this point you'll have heard material around a few key cloud topics such as regions, availability zones, cloud networking and VPC's. You'll have also heard information around Kubernetes. 
+
+Building on this theoretical knowledge, this guided lab will show how to create the various cloud services required to provision a Kubernetes cluster on AWS. For that provisioning you'll be taking the **Infrastructure as Code** approach and using [Terraform](https://terraform.io) to create our cloud infrastructure.
+
+For GCP, the end result is that you'll have a [GKE (Google Kubernetes Engine) Cluster](https://cloud.google.com/kubernetes-engine)
 
 ## Instructions
 
