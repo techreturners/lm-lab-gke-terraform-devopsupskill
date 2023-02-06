@@ -126,7 +126,7 @@ The reason for the rename is because you'll see it [mentioned in the **versions.
 
 ### Step 7 - Initialise terraform
 
-We need to get terraform to pull down the google provider.
+We need to get terraform to pull down the [Terraform Google provider](https://registry.terraform.io/providers/hashicorp/google/latest).
 
 In order to do this run:
 
@@ -237,7 +237,9 @@ It should probably say something like this:
 No resources found in default namespace.
 ```
 
-Lets deploy the nginx deployment.
+Lets deploy the NGINX deployment.
+
+If you haven't encountered NGINX before it is a popular [open source webserver](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/).
 
 ```
 kubectl apply -f kubernetes/nginx-deployment.yaml
