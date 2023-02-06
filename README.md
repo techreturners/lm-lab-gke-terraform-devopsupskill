@@ -106,7 +106,7 @@ This file defines the outputs that will be produced by terraform when things hav
 
 **versions.tf** 
 
-Configures the terraform providers (in our case the GCP provider) and sets the Terraform version to at least 0.14.
+Configures the terraform providers (in our case the GCP provider) and sets the Terraform version to at least 1.3.0.
 
 ### Step 5 - Update the tfvars file
 
