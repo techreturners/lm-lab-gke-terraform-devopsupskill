@@ -163,9 +163,9 @@ We can then create your cluster by applying the configuration.
 terraform apply
 ```
 
-Sit back and relax ☕️ - it might take 10 mins or so to create your cluster.
+Sit back and relax ☕️ - it might take some time ( > 10 mins ) or so to create your cluster.
 
-Once its finished it'll output something like the info below. 
+Once it has finished it'll output something like the info below. 
 
 Those **outputs** are defined in the **outputs.tf** file.
 
@@ -182,11 +182,11 @@ Once its done you'll have your Kubernetes cluster all ready to go!!!
 
 ### Step 10 - Configure your **kube control** 
 
-[kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) is used to issue actions on our cluster.
+[kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) is used to issue actions on your cluster.
 
 We need to configure **kubectl** to be able to authenticate with your cluster.
 
-To do this we use the Google Cloud Command Line to get the credentials. Notice how we reference the outputs in the command below:
+To do this you will use the Google Cloud Command Line to get the credentials. Notice how we reference the terraform outputs in the command below:
 
 
 ```
