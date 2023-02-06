@@ -174,7 +174,7 @@ Outputs:
 
 kubernetes_cluster_host = "35.246.22.132"
 kubernetes_cluster_name = "devops-upskill-305410-gke"
-project_id = "devops-upskill-305410"
+project_id = "devops-upskill-123456"
 region = "europe-west2"
 ```
 
