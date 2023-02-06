@@ -71,10 +71,10 @@ kubectl version
 It should print something like the below:
 
 ```
-Client Version: version.Info{Major:"1", Minor:"20", GitVersion:"v1.20.4", GitCommit:"e87da0bd6e03ec3fea7933c4b5263d151aafd07c", GitTreeState:"clean", BuildDate:"2021-02-21T20:21:49Z", GoVersion:"go1.15.8", Compiler:"gc", Platform:"darwin/amd64"}
+Client Version: version.Info{Major:"1", Minor:"26", GitVersion:"v1.20.1", GitCommit:"8f94681cd294aa8cfd3407b8191f6c70214973a4", GitTreeState:"clean", BuildDate:"2021-02-21T20:21:49Z", GoVersion:"go1.15.8", Compiler:"gc", Platform:"darwin/amd64"}
 ```
-
-Dont worry if it says "Unable to connect to server" at this stage. We'll be sorting that later.
+> **⚠️ Note**
+> Dont worry if it says "Unable to connect to server" at this stage. We'll be sorting that later.
 
 ### Step 4 - Explore the files
 
@@ -92,7 +92,7 @@ Think of this as the place where you define the actual values of variables to be
 
 **vpc.tf**
 
-This file contains the setup for the Virtual Private Cloud (VPC - remember those from session two) that your GKE will be placed into.
+This file contains the setup for the Virtual Private Cloud (VPC - remember those from session two) that your GKE will be placed into. Take a look into it and spot those CIDR ranges. Also remember the IP address ranges falling within that internal network designation from [RFC 1918](https://www.rfc-editor.org/rfc/rfc1918)
 
 **gke.tf** 
 
