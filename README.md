@@ -190,7 +190,7 @@ To do this you will use the Google Cloud Command Line to get the credentials. No
 
 
 ```
-gcloud container clusters get-credentials $(terraform output -raw kubernetes_cluster_name) --region $(terraform output -raw region)
+gcloud container clusters get-credentials $(terraform output -raw kubernetes_cluster_name) --region $(terraform output -raw region) --project $(terraform output -raw project_id)
 ```
 
 It should say something like:
