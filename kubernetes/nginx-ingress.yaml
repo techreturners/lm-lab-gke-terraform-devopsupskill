@@ -1,14 +1,10 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-webserver-ingress
-  annotations:
-    kubernetes.io/ingress.class: gce
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /*
-        backend:
-          serviceName: nginx-web-server
-          servicePort: 80
+  defaultBackend:
+    service:
+      name: nginx-web-server
+      port:
+        number: 80
