@@ -76,7 +76,30 @@ Client Version: version.Info{Major:"1", Minor:"26", GitVersion:"v1.20.1", GitCom
 > **⚠️ Note**
 > Dont worry if it says "Unable to connect to server" at this stage. We'll be sorting that later.
 
-### Step 4 - Explore the files
+### Step 4 - Ensure kubectl can connect to cluster
+
+Recent changes to open source Kubernetes has meant that there are tweaks to be made to ensure you can connect to GKE from your laptop. This means we need to install some extra features from the Google command line. To install authentication plugin run:
+
+```
+gcloud components install gke-gcloud-auth-plugin
+```
+
+To verify the installtion, if you are on a Mac/Linux you can run:
+
+```
+gke-gcloud-auth-plugin --version
+```
+
+To verify the installtion, if you are on Windows you can run:
+
+```
+gke-gcloud-auth-plugin.exe --version
+```
+
+> **⚠️Note: GKE Auth**
+> For those interested, you can read a bit more about the [changes here](https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke)
+
+### Step 5 - Explore the files
 
 Before we go ahead and create your cluster its worth exploring the files.
 
@@ -108,13 +131,13 @@ This file defines the outputs that will be produced by terraform when things hav
 
 Configures the terraform providers (in our case the GCP provider) and sets the Terraform version to at least 1.3.0.
 
-### Step 5 - Update the tfvars file
+### Step 6 - Update the tfvars file
 
 Now you know the files the next step is to update the tfvars file according to your project.
 
 Update the project ID to be that of your Google Project ID and change the region if you would like it to be anything other than the UK.
 
-### Step 6 - Update service account
+### Step 7 - Update service account
 
 In the terraform installation video you setup a service account. You'll need to re-use that service account again in order for Terraform to authenticate with your Google cloud account.
 
@@ -124,7 +147,7 @@ Then rename that service account file to be called **service-account.json**
 
 The reason for the rename is because you'll see it [mentioned in the **versions.tf**](./versions.tf) file and also in the **.gitignore** file. Choosing the name **service-account.json** will ensure you don't accidentally commit it due to us adding it to the gitignore file.
 
-### Step 7 - Initialise terraform
+### Step 8 - Initialise terraform
 
 We need to get terraform to pull down the [Terraform Google provider](https://registry.terraform.io/providers/hashicorp/google/latest).
 
@@ -145,7 +168,7 @@ Initializing provider plugins...
 - Installed hashicorp/google v3.58.0 (signed by HashiCorp)
 ```
 
-### Step 8 - Review changes with a plan
+### Step 9 - Review changes with a plan
 
 Firstly run a **plan** to see if what Terraform decides will happen.
 
@@ -153,7 +176,7 @@ Firstly run a **plan** to see if what Terraform decides will happen.
 terraform plan
 ```
 
-### Step 9 - Create your cluster with apply
+### Step 10 - Create your cluster with apply
 
 We can then create your cluster by applying the configuration.
 
@@ -180,13 +203,19 @@ region = "europe-west2"
 
 Once its done you'll have your Kubernetes cluster all ready to go!!!
 
-### Step 10 - Configure your **kube control** 
+### Step 11 - Configure your **kube control** 
 
 [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) is used to issue actions on your cluster.
 
 We need to configure **kubectl** to be able to authenticate with your cluster.
 
-To do this you will use the Google Cloud Command Line to get the credentials. Notice how we reference the terraform outputs in the command below:
+Firstly if you remember step 4 we installed the GKE auth plugin. We need to set an environment variable that tells kubectl that we wish to use the auth plugin. To do this:
+
+```
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+```
+
+Then you will use the Google Cloud Command Line to get the credentials. Notice how we reference the terraform outputs in the command below:
 
 
 ```
@@ -197,10 +226,11 @@ It should say something like:
 
 ```
 Fetching cluster endpoint and auth data.
+Kubernetes v1.21.0-alpha+eabdbc0a40fe7efda92e10270f27b0a3485fb743
 kubeconfig entry generated for devops-upskill-305410-gke.
 ```
 
-### Step 11 - Check if kubectl can access cluster
+### Step 12 - Check if kubectl can access cluster
 
 You can now verify if `kubectl` can access your cluster.
 
@@ -221,7 +251,7 @@ gke-devops-upskill-3-devops-upskill-3-fa0c8ee0-j7qt   Ready    <none>   18m   v1
 
 Exciting eh!!! 🚀
 
-### Step 12 - Deploying your first app in a pod!!
+### Step 13 - Deploying your first app in a pod!!
 
 Finally lets get a container running on your cluster.
 
@@ -285,7 +315,7 @@ nginx-deployment-5cd5cdbcc4-knxss   1/1     Running       0          3m47s
 nginx-deployment-5cd5cdbcc4-sqm2p   0/1     Terminating   0          3m47s
 ```
 
-### Step 13 - Exposing your webserver
+### Step 14 - Exposing your webserver
 
 Finally lets get that web server exposed to the internet with a **service**
 
@@ -305,7 +335,7 @@ kubectl apply -f kubernetes/nginx-ingress.yaml
 
 Kubernetes will now create the required load balancer and create an external IP address for your ingress point.
 
-Keep running the command below until you see an external IP address
+Keep running the command below until you see an external IP address listed under the **ADDRESS** column. Dont worry it can take some time.
 
 ```
 kubectl get ing
@@ -318,7 +348,7 @@ NAME                      CLASS    HOSTS   ADDRESS         PORTS   AGE
 nginx-webserver-ingress   <none>   *       34.117.49.187   80      95s
 ```
 
-### Step 14 - Marvel at your creation
+### Step 15 - Marvel at your creation
 
 After around 5 to 10 mins you should be able to hit the endpoint with your browser. Using the example above I would go to: http://34.117.49.187
 
@@ -328,7 +358,7 @@ After around 5 to 10 mins you should be able to hit the endpoint with your brows
 > **⚠️ Note**
 > Remember to check Google classroom before tearing things down. There are a couple of screenshots you should submit as evidence of your success 🙌
 
-### Step 15 - Tearing down your cluster
+### Step 16 - Tearing down your cluster
 
 Finally we want to destroy our cluster.
 
